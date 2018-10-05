@@ -1,0 +1,44 @@
+#body {
+    margin-top: 9%;
+}
+
+
+.jumbotron.bg-white {
+    border: 1px solid gray;
+}
+
+p {
+    margin: 0;
+    padding: 0;
+  }
+  
+  #clock {
+    font-family: 'Share Tech Mono', monospace;
+    text-align: center;
+    position: absolute;
+    left: 50%;
+    top: 62%;
+    -webkit-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
+    color: white;
+    
+  }
+  #clock .time {
+    letter-spacing: 0.05em;
+    font-size: 2.5vw;
+    display: inline-block;
+    
+  }
+  #clock .date {
+    letter-spacing: 0.1em;
+    font-size: 2vw;
+    display: inline-block;
+  }
+  
+  th, tr, p, label, h3 {
+    font-family: 'Share Tech Mono', monospace;
+  }
+  #navbar {
+      padding:2%;
+  }
+ 
