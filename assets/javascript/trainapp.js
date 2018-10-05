@@ -63,8 +63,8 @@ dataRef.ref().on("child_added", function (childSnapshot) {
 
   // add train status to html table
   $("#Schedule > tbody").append("<tr><td>" + storeTrain + "</td><td>"
-   + storeDestination + "</td><td>" + storeFrequency + " min</td><td>" 
-   + arrivalTime + "</td><td>" + storeMinutes + "</td></tr>");
+    + storeDestination + "</td><td>" + storeFrequency + " min</td><td>"
+    + arrivalTime + "</td><td>" + storeMinutes + "</td></tr>");
 
 });
 

@@ -1,129 +1,149 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Amtrak Train Status Tracker</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" media="screen" href="assets/css/style.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
-    <link rel='stylesheet prefetch' href='https://fonts.googleapis.com/css?family=Share+Tech+Mono'>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/5.5.2/firebase.js"></script>
-    <script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script>
-</head>
-<body>
-        
-    <!-- NavBar -->
-    <div class="container-fluid">
-        <div class="jumbotron-fluid">
-        <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark" id="navbar">
-                    <img src="assets/images/Amtrak-Logo copy.png" width="14%"  alt="amtrakLogo">
-                   <div id="clock">
-                <p class="date">{{ date }}</p><p class="time">{{ time }}</p>
-                
-            </div>
-              </nav>
-            </div>
-            </div>
-        <!-- Nav Bar End -->
 
-     
-        <div class="container bg-white" id="body">
-            
-        <!-- Current Train Schedule -->
-        <div class="jumbotron bg-white">
-            <div class="header">
-                <h1>Train Status</h1>
-            </div>
-            <table id="Schedule" class="table table-bordered table-striped">
-                    <thead class="text-white bg-dark">
-                      <tr>
-                        <th><strong>Train Name</strong></th>
-                        <th><strong>Destination</strong></th>
-                        <th><strong>Frequency</strong></th>
-                        <th><strong>Next Arrival</strong></th>
-                        <th><strong>Minutes Away</strong></th>
-                      </tr>
-                      <hr>
-                    </thead>
-                    <tbody>
-                      
-                    </tbody>
-                  </table>
-</div>
-<!-- End Current Train Schedule
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Amtrak Train Status Tracker</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" type="text/css" media="screen" href="assets/css/style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+  <link rel='stylesheet prefetch' href='https://fonts.googleapis.com/css?family=Share+Tech+Mono'>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+    crossorigin="anonymous">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/5.5.2/firebase.js"></script>
+  <script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script>
+</head>
+
+<body>
+
+  <!-- NavBar -->
+  <div class="container-fluid">
+    <div class="jumbotron-fluid">
+      <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark" id="navbar">
+        <img src="assets/images/Amtrak-Logo copy.png" width="14%" alt="amtrakLogo">
+        <div id="clock">
+          <p class="date">{{ date }}</p>
+          <p class="time">{{ time }}</p>
+
+        </div>
+      </nav>
+    </div>
+  </div>
+  <!-- Nav Bar End -->
+
+
+  <div class="container bg-white" id="body">
+
+    <!-- Current Train Schedule -->
+    <div class="jumbotron bg-white">
+      <div class="header">
+        <h1>Train Status</h1>
+      </div>
+      <table id="Schedule" class="table table-bordered table-striped">
+        <thead class="text-white bg-dark">
+          <tr>
+            <th>
+              <strong>Train Name</strong>
+            </th>
+            <th>
+              <strong>Destination</strong>
+            </th>
+            <th>
+              <strong>Frequency</strong>
+            </th>
+            <th>
+              <strong>Next Arrival</strong>
+            </th>
+            <th>
+              <strong>Minutes Away</strong>
+            </th>
+          </tr>
+          <hr>
+        </thead>
+        <tbody>
+
+        </tbody>
+      </table>
+    </div>
+    <!-- End Current Train Schedule
 
 Add Train to Schedule -->
-<div class="jumbotron bg-white">
-<form>
-  <header><h3>Add Train</h3></header>
-  <hr>
-  <div class="form-group">
-      <label for "train-input">Train Name</label>
-  <select class="custom-select custom-select-lg mb-3" id="train-input">
-    <option selected>Select</option>
-    <!-- //additional trains can be added here -->
-    <option value="Amtrak Cascades">Amtrak Cascades</option>
-    <option value="California Zephyr">California Zephyr</option>
-    <option value="Empire Builder">Empire Builder</option>
-    <option value="Empire Service">Empire Service</option>
-    <option value="Hiawatha">Hiawatha</option>
-    <option value="Keystone Service">Keystone Service</option>
-    <option value="Maple Leaf">Maple Leaf</option>
-    <option value="Missouri River Runner">Missouri River Runner</option>
-    <option value="Northeast Corridor">Northeast Corridor</option>
-    <option value="Pacific Surfliner">Pacific Surfliner</option>
-    <option value="Silver Service / Palmetto">Silver Service / Palmetto</option>
-    <option value="Sunset Limited">Sunset Limited</option>
-    <option value="Texas Eagle">Texas Eagle</option>
-    <option value="Vermonter">Vermonter</option>
-  </select>
+    <div class="jumbotron bg-white">
+      <form>
+        <header>
+          <h3>Add Train</h3>
+        </header>
+        <hr>
+        <div class="form-group">
+          <label for "train-input">Train Name</label>
+          <select class="custom-select custom-select-lg mb-3" id="train-input">
+            <option selected>Select</option>
+            <!-- //additional trains can be added here -->
+            <option value="Amtrak Cascades">Amtrak Cascades</option>
+            <option value="California Zephyr">California Zephyr</option>
+            <option value="Empire Builder">Empire Builder</option>
+            <option value="Empire Service">Empire Service</option>
+            <option value="Hiawatha">Hiawatha</option>
+            <option value="Keystone Service">Keystone Service</option>
+            <option value="Maple Leaf">Maple Leaf</option>
+            <option value="Missouri River Runner">Missouri River Runner</option>
+            <option value="Northeast Corridor">Northeast Corridor</option>
+            <option value="Pacific Surfliner">Pacific Surfliner</option>
+            <option value="Silver Service / Palmetto">Silver Service / Palmetto</option>
+            <option value="Sunset Limited">Sunset Limited</option>
+            <option value="Texas Eagle">Texas Eagle</option>
+            <option value="Vermonter">Vermonter</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="destination-input">Desinations</label>
+          <select class="custom-select custom-select-lg mb-3" id="destination-input">
+            <option selected>Select</option>
+            <!-- //additoinal locations can be added here -->
+            <option value="New York">New York</option>
+            <option value="Los Angeles">Los Angeles</option>
+            <option value="Chicago">Chicago</option>
+            <option value="Houston">Houston</option>
+            <option value="Phoenix">Phoenix</option>
+            <option value="Philadelphia">Philadelphia</option>
+            <option value="San Antonio">San Antonio</option>
+            <option value="San Diego">San Diego</option>
+            <option value="San Francisco">San Francisco</option>
+            <option value="Seattle">Seattle</option>
+            <option value="St. Paul">St. Paul</option>
+            <option value="Denver">Denver</option>
+            <option value="Orlando">Orlando</option>
+            <option value="New Orleans">New Orleans</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="time-input">First Train Time</label>
+          <input type="text" class="form-control" id="time-input" aria-describedby="discription" placeholder="Arrival Time">
+          <small id="discription" class="form-text text-muted">HH:mm - military time</small>
+        </div>
+        <div class="form-group">
+          <label for="frequency-input">Frequency</label>
+          <input type="text" class="form-control" id="frequency-input" placeholder="Enter Frequency">
+          <small id="discription" class="form-text text-muted">In minutes</small>
+        </div>
+        <button type="submit" class="btn btn-primary" id="add-train">Submit</button>
+      </form>
+    </div>
   </div>
-  <div class="form-group">
-      <label for="destination-input">Desinations</label>
-  <select class="custom-select custom-select-lg mb-3" id="destination-input">
-    <option selected>Select</option>
-    <!-- //additoinal locations can be added here -->
-    <option value="New York">New York</option>
-    <option value="Los Angeles">Los Angeles</option>
-    <option value="Chicago">Chicago</option>
-    <option value="Houston">Houston</option>
-    <option value="Phoenix">Phoenix</option>
-    <option value="Philadelphia">Philadelphia</option>
-    <option value="San Antonio">San Antonio</option>
-    <option value="San Diego">San Diego</option>
-    <option value="San Francisco">San Francisco</option>
-    <option value="Seattle">Seattle</option>
-    <option value="St. Paul">St. Paul</option>
-    <option value="Denver">Denver</option>
-    <option value="Orlando">Orlando</option>
-    <option value="New Orleans">New Orleans</option>
-  </select>
-  </div>
-  <div class="form-group">
-    <label for="time-input">First Train Time</label>
-    <input type="text" class="form-control" id="time-input" aria-describedby="discription" placeholder="Arrival Time">
-    <small id="discription" class="form-text text-muted">HH:mm - military time</small>
-  </div>
-  <div class="form-group">
-    <label for="frequency-input">Frequency</label>
-    <input type="text" class="form-control" id="frequency-input" placeholder="Enter Frequency">
-    <small id="discription" class="form-text text-muted">In minutes</small>
-  </div>
-  <button type="submit" class="btn btn-primary" id="add-train">Submit</button>
-</form>
-</div>
-</div>
-<!-- End Train Scheduler -->
+  <!-- End Train Scheduler -->
 
 
 
-<script src='https://cdnjs.cloudflare.com/ajax/libs/vue/2.3.4/vue.min.js'></script> 
-<script src="assets/javascript/trainapp.js"></script>
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/vue/2.3.4/vue.min.js'></script>
+  <script src="assets/javascript/trainapp.js"></script>
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+    crossorigin="anonymous"></script>
 </body>
+
 </html>
