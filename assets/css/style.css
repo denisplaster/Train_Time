@@ -41,4 +41,9 @@ p {
   #navbar {
       padding:2%;
   }
+  @media only screen and (max-width: 768px) {
+    .jumbotron.bg-white {
+      border: none;
+  }
+  }
  
