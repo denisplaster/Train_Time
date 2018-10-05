@@ -12,13 +12,13 @@ firebase.initializeApp(config);
 
 var dataRef = firebase.database();
 
-// set up variables for train tracking
+// set up variables for train tracking, editing, and removal
 var Train = "";
 var destination = "";
 var firstTime = "";
 var Frequency = "";
 
-// Capture Button Click
+// Capture, Edit, Remove, Button onClick
 $("#add-train").on("click", function () {
 
   Train = $("#train-input").val().trim();
@@ -43,6 +43,8 @@ $("#add-train").on("click", function () {
 
 });
 
+
+
 // create firebase event for when user adds train data
 dataRef.ref().on("child_added", function (childSnapshot) {
 
@@ -64,7 +66,7 @@ dataRef.ref().on("child_added", function (childSnapshot) {
   // add train status to html table
   $("#Schedule > tbody").append("<tr><td>" + storeTrain + "</td><td>"
     + storeDestination + "</td><td>" + storeFrequency + " min</td><td>"
-    + arrivalTime + "</td><td>" + storeMinutes + "</td></tr>");
+    + arrivalTime + "</td><td>" + storeMinutes  + "</td></tr>");
 
 });
 
